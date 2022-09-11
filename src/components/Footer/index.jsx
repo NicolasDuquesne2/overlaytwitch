@@ -5,7 +5,7 @@ function Footer({params}) {
 
     if(params) {
         return (
-            <footer className="header">
+            <footer className="footer">
                 <h1>{params.music}: {params.composer}</h1>
             </footer>
         )

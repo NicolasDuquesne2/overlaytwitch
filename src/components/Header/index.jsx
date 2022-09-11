@@ -18,6 +18,7 @@ function Header() {
     return (
         <header className="header">
              <Clock value={time} />
+             <h1>PopAndRepop</h1>
         </header>
     )
 }
