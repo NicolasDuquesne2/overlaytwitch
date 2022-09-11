@@ -1,11 +1,10 @@
 import React from "react"
 import Header from "../../components/Header"
-import Footer from "../../components/Footer"
 import Body from "../../components/Body"
+import Footer from "../../components/Footer"
 import {texts} from "../../params/Texts"
-import "./home.css"
 
-function Home() {
+function Ending() {
     return (
         <React.Fragment>
             <div class="bg"></div>
@@ -13,11 +12,11 @@ function Home() {
             <div class="bg bg3"></div>
             <div className="content">
                     <Header />
-                    <Body params={{title: texts.home.title}}/>
-                    <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
+                    <Body params={{title: texts.ending.title}}/>
+                    <Footer params={{music: texts.ending.music, composer: texts.ending.composer}}/>
             </div>
         </React.Fragment>
     )
 }
 
-export default Home
+export default Ending
