@@ -13,7 +13,7 @@ function Home() {
             <div className="content">
                     <Header />
                     <Body params={{title: "Le stream va bientôt débuter"}}/>
-                    <Footer />
+                    <Footer params={{music: "lol"}}/>
             </div>
         </React.Fragment>
     )
