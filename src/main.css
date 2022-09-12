@@ -45,3 +45,10 @@ body {
         transform:translateX(25%);
     }
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
