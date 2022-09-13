@@ -3,13 +3,15 @@ import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import {texts} from "../../params/Texts"
-import Request from "../../Requests"
+import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import "./home.css"
 
 function Home() {
+   const tokenUrlTwitch =  useSetUrlWithParams()
 
     useEffect(() => {
-        Request()
+        console.log(tokenUrlTwitch)
+        //window.location.href = tokenUrlTwitch
     }, [])
 
     return (

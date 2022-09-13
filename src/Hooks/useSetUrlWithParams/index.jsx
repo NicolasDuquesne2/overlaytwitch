@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from "react"
-import axios from "axios"
+import React from "react"
 
-function Request() {
-    const href = window.location.href
+function useSetUrlWithParams() {
     const twitchAuthUrl = "https://id.twitch.tv/oauth2/authorize"
     const appId = "qrkfsj1g5t9cdtadlev9ngnkcvucg8"
     const redirectUri = "http://localhost:3000/"
@@ -25,11 +23,10 @@ function Request() {
         return urlParams.join("&")
     }
 
-    const request = `https://id.twitch.tv/oauth2/authorize?${encodeQueryString(params)}`
-    console.log(request)
-    console.log(href)
+    const request = `${twitchAuthUrl}?${encodeQueryString(params)}`
+    return request
 
 }
 
-export default Request
+export default useSetUrlWithParams
 
