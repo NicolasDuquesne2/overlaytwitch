@@ -1,19 +1,7 @@
 import React from "react"
 
-function useSetUrlWithParams() {
-    const twitchAuthUrl = "https://id.twitch.tv/oauth2/authorize"
-    const appId = "qrkfsj1g5t9cdtadlev9ngnkcvucg8"
-    const redirectUri = "http://localhost:3000/"
-    const responseType = "token"
-    const scopes = "channel:read:vips user:read:email"
-
-    const params = {
-        response_type: responseType,
-        client_id: appId,
-        redirect_uri: redirectUri,
-        scope: scopes
-    }
-
+function useSetUrlWithParams(baseUrl, params) {
+   
     const encodeQueryString = (params) => {
         let urlParams = []
         for (let key in params) {
@@ -23,7 +11,7 @@ function useSetUrlWithParams() {
         return urlParams.join("&")
     }
 
-    const request = `${twitchAuthUrl}?${encodeQueryString(params)}`
+    const request = `${baseUrl}?${encodeQueryString(params)}`
     return request
 
 }

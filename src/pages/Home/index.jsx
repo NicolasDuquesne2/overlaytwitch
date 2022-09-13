@@ -3,15 +3,21 @@ import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import {texts} from "../../params/Texts"
+import {params, baseUrl, paramsToSearch} from "../../params/UrlTokenRequestParams"
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
+import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import "./home.css"
 
 function Home() {
-   const tokenUrlTwitch =  useSetUrlWithParams()
+    const tokenUrlTwitch =  useSetUrlWithParams(baseUrl, params)
+    const queryString = window.location.hash
+    const urlParams = useGetUrlParams(queryString, paramsToSearch)
+
 
     useEffect(() => {
-        console.log(tokenUrlTwitch)
-        //window.location.href = tokenUrlTwitch
+        if (urlParams.length === 0) {
+            window.location.href = tokenUrlTwitch
+        }
     }, [])
 
     return (
