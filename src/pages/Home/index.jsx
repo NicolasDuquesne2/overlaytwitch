@@ -9,16 +9,16 @@ import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import "./home.css"
 
 function Home() {
-    const tokenUrlTwitch =  useSetUrlWithParams(baseUrl, params)
+    /**const tokenUrl =  useSetUrlWithParams(baseUrl, params)
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
 
 
     useEffect(() => {
         if (urlParams.length === 0) {
-            window.location.href = tokenUrlTwitch
+            window.location.href = tokenUrl
         }
-    }, [])
+    }, [])*/
 
     return (
         <React.Fragment>
