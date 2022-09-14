@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useAxios } from '../../Hooks/useAxios/useAxios'
 
 export const followersSlice = createSlice( {
     name: 'followers',
@@ -6,11 +7,11 @@ export const followersSlice = createSlice( {
         value: [],
     },
     reducers: {
-        set: (state, action) => {
+        getFollowers: (state, action) => {
             state.value.push(action.payload)
         }
     }
 })
 
-export const { add, update } = followersSlice.actions
+export const { getFollowers } = followersSlice.actions
 export default followersSlice.reducer

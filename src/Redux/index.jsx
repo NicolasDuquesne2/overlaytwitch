@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import followersReducer from './Followers'
+import followersReducer from './Followers/followersSlice'
 
 const store = configureStore({
     reducer: {

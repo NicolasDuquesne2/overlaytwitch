@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect } from "react"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import Body from "../../components/Body"
-import {useAxios} from "../../Hooks/useAxios/useAxios"
+import { useDispatch, useSelector } from "react-redux/es/exports"
+import { getFollowers } from "../../Redux/Followers/followersSlice"
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {texts} from "../../params/Texts"
@@ -10,25 +11,30 @@ import {params, baseUrl, paramsToSearch} from "../../params/UrlTokenRequestParam
 import "./home.css"
 
 function Home() {
+    const dispatch = useDispatch()
     const tokenUrl =  useSetUrlWithParams(baseUrl, params)
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
-    const [query, setQuery] = useState(null)
-    console.log(useAxios(query))
+    const reqResponse = useSelector(state => state.followers)
+    console.log(reqResponse)
 
     useEffect(() => {
         if (urlParams.includes(null)) {
             window.location.href = tokenUrl
         } else {
-            setQuery({
-                action: "getFollowers", 
-                message: "Followers data could not be fetched",
-                payload: {method: 'get', data: {to_id:"210661934"}, headers: {
-                            Authorization: `Bearer ${urlParams[0]}`,
-                            "client-id":params.client_id
-                                                        }
-            }})
+
+            dispatch(getFollowers(
+                {
+                    action: "getFollowers", 
+                    message: "Followers data could not be fetched",
+                    payload: {method: 'get', data: {to_id:"210661934"}, headers: {
+                                Authorization: `Bearer ${urlParams[0]}`,
+                                "client-id":params.client_id
+                                                            }
+                }}
+            ))
         }
+
     }, [])
 
     return (
