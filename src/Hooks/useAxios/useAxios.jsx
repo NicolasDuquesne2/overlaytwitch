@@ -3,9 +3,7 @@ import axios from "axios"
 
 
 export function useAxios(params) {
-    let payload = {}
-    let baseUrl = ""
-
+    
     function fetchAxios(payload, message) {
         let returned = null
     
@@ -31,14 +29,7 @@ export function useAxios(params) {
     }
 
     if (params) {
-        switch(params.action) {
-            case 'getFollowers':
-                baseUrl = "https://api.twitch.tv/helix"
-                payload = params.payload
-                payload.url = `${baseUrl}/users/follows`
-                return fetchAxios(payload, params.message)
-            default:
-        }
+        return fetchAxios(params.payload, params.message)
     }
 
 }
