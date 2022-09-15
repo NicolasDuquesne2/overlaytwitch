@@ -13,3 +13,8 @@
     border-top-style: none;
     border-width: 2px;
 }
+
+.stats-wrapper {
+    display: flex;
+    flex-direction: column;
+}

@@ -26,7 +26,7 @@ export const fetchFollowers = (params) => async dispatch => {
     const dataFetch = useAxios(params)
     dataFetch
     .then(res => {
-        res.error? dispatch(getError(res.error)): dispatch(getFollowers(res))
+        res.error? dispatch(getError(res.error)): dispatch(getFollowers(res.data))
     })
     .catch(err => console.log(err))
 }

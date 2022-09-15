@@ -16,8 +16,13 @@ function Home() {
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers)
-    console.log(followers)
+    let numOfFollowers = null
+    let lastFollower = null
 
+    if (followers.value !== null) {
+        numOfFollowers =  followers.value.total
+        lastFollower =  followers.value.data[0].from_name
+    }
 
     useEffect(() => {
         if (urlParams.includes(null)) {
@@ -44,7 +49,7 @@ function Home() {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
+                    <Header params={{numOfFollowers, lastFollower}}/>
                     <Body params={{title: texts.home.title}}/>
                     <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
             </div>

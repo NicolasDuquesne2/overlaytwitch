@@ -3,7 +3,7 @@ import Clock from "react-clock"
 import 'react-clock/dist/Clock.css';
 import "./header.css"
 
-function Header() {
+function Header({params}) {
 
     const [time, setTime] = useState(new Date())
 
@@ -19,6 +19,10 @@ function Header() {
         <header className="header">
              <Clock value={time} />
              <h1>PopAndRepop</h1>
+             <div className="stats-wrapper">
+                <p>{`${params.numOfFollowers} personnes suivent déjà la chaine`}</p>
+                <p>{`${params.lastFollower} nous a rejoint dernièrement`}</p>
+             </div>
         </header>
     )
 }
