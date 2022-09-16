@@ -4,6 +4,7 @@ import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
+import {setToken } from '../../Redux/Token/tokenSlice'
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {texts} from "../../params/Texts"
@@ -11,13 +12,16 @@ import {params, baseUrl, paramsToSearch} from "../../params/UrlTokenRequestParam
 import "./home.css"
 
 function Home() {
+    let numOfFollowers = null
+    let lastFollower = null
+    /**
     const dispatch = useDispatch()
     const tokenUrl =  useSetUrlWithParams(baseUrl, params)
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers)
-    let numOfFollowers = null
-    let lastFollower = null
+    const token = useSelector(state => state.token)
+
 
     if (followers.value !== null) {
         numOfFollowers =  followers.value.total
@@ -25,9 +29,11 @@ function Home() {
     }
 
     useEffect(() => {
-        if (urlParams.includes(null)) {
+        if (urlParams.includes(null) && token === null) {
             window.location.href = tokenUrl
-        } else {
+        } else if (!urlParams.includes(null) && token === null) {
+
+            dispatch(setToken(urlParams[0]))
 
             dispatch(fetchFollowers(
                 {
@@ -39,9 +45,13 @@ function Home() {
                                                             }
                 }}
             ))
+
+        } else if (!urlParams.includes(null) && token !== null) {
+            window.location.href = params.redirect_uri
         }
 
     }, [])
+    */
 
     return (
         <React.Fragment>

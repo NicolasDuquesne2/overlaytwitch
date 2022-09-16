@@ -7,11 +7,11 @@ import {texts} from "../../params/Texts"
 function Ending() {
     return (
         <React.Fragment>
-            <div class="bg"></div>
-            <div class="bg bg2"></div>
-            <div class="bg bg3"></div>
+            <div className="bg"></div>
+            <div className="bg bg2"></div>
+            <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
+                    <Header params={{numOfFollowers: null, lastFollower: null}}/>
                     <Body params={{title: texts.ending.title}}/>
                     <Footer params={{music: texts.ending.music, composer: texts.ending.composer}}/>
             </div>
