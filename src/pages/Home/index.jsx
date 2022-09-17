@@ -36,13 +36,11 @@ function Home() {
         }
 
         if (localStorToken !== null) {
-            console.log('set token with local')
             dispatch(setToken(localStorToken))
         }
     
-
         if (token.value !== null) {
-            
+
             localStorage.setItem('token', token.value)
             dispatch(fetchFollowers(
                 {
