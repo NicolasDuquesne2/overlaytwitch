@@ -12,59 +12,71 @@ import {params, baseUrl, paramsToSearch} from "../../params/UrlTokenRequestParam
 import "./home.css"
 
 function Home() {
-    let numOfFollowers = null
-    let lastFollower = null
-    /**
+
     const dispatch = useDispatch()
     const tokenUrl =  useSetUrlWithParams(baseUrl, params)
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers)
     const token = useSelector(state => state.token)
-
-
-    if (followers.value !== null) {
-        numOfFollowers =  followers.value.total
-        lastFollower =  followers.value.data[0].from_name
-    }
-
+    let numOfFollowers = null
+    let lastFollower = null
+    
     useEffect(() => {
-        if (urlParams.includes(null) && token === null) {
+
+        const localStorToken = localStorage.getItem('token')
+    
+
+        if (urlParams.includes(null) && token.value === null && localStorToken === null) {
             window.location.href = tokenUrl
-        } else if (!urlParams.includes(null) && token === null) {
+        }
 
+        if (!urlParams.includes(null) && token.value === null && localStorToken === null) {
             dispatch(setToken(urlParams[0]))
+        }
 
+        if (localStorToken !== null) {
+            console.log('set token with local')
+            dispatch(setToken(localStorToken))
+        }
+    
+        
+        if (token.value !== null) {
+            console.log('launch request')
+            localStorage.setItem('token', token.value)
             dispatch(fetchFollowers(
                 {
                     action: "getFollowers", 
                     message: "Followers data could not be fetched",
                     payload: {method: 'get', url: "https://api.twitch.tv/helix/users/follows", params: {to_id:"210661934"}, headers: {
-                                Authorization: `Bearer ${urlParams[0]}`,
+                                Authorization: `Bearer ${token.value}`,
                                 "client-id":params.client_id
                                                             }
                 }}
             ))
-
-        } else if (!urlParams.includes(null) && token !== null) {
-            window.location.href = params.redirect_uri
         }
 
-    }, [])
-    */
+        if (window.location.href !== params.redirect_uri) { window.location.href = params.redirect_uri}
 
-    return (
-        <React.Fragment>
-            <div className="bg"></div>
-            <div className="bg bg2"></div>
-            <div className="bg bg3"></div>
-            <div className="content">
-                    <Header params={{numOfFollowers, lastFollower}}/>
-                    <Body params={{title: texts.home.title}}/>
-                    <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
-            </div>
-        </React.Fragment>
-    )
+    }, [token])
+
+
+    if (followers.value !== null) {
+        numOfFollowers =  followers.value.total
+        lastFollower =  followers.value.data[0].from_name
+        return (
+            <React.Fragment>
+                <div className="bg"></div>
+                <div className="bg bg2"></div>
+                <div className="bg bg3"></div>
+                <div className="content">
+                        <Header params={{numOfFollowers, lastFollower}}/>
+                        <Body params={{title: texts.home.title}}/>
+                        <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
+                </div>
+            </React.Fragment>
+        )
+    }
 }
 
 export default Home
