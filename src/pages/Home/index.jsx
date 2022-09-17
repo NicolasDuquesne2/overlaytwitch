@@ -40,9 +40,9 @@ function Home() {
             dispatch(setToken(localStorToken))
         }
     
-        
+
         if (token.value !== null) {
-            console.log('launch request')
+            
             localStorage.setItem('token', token.value)
             dispatch(fetchFollowers(
                 {
