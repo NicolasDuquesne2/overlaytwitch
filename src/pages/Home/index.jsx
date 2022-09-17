@@ -8,7 +8,7 @@ import {setToken } from '../../Redux/Token/tokenSlice'
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {texts} from "../../params/Texts"
-import {params, baseUrl, paramsToSearch} from "../../params/UrlTokenRequestParams"
+import {params, baseUrl, paramsToSearch, ReqParams} from "../../params/UrlTokenRequestParams"
 import "./home.css"
 
 function Home() {
@@ -44,11 +44,11 @@ function Home() {
             localStorage.setItem('token', token.value)
             dispatch(fetchFollowers(
                 {
-                    action: "getFollowers", 
-                    message: "Followers data could not be fetched",
-                    payload: {method: 'get', url: "https://api.twitch.tv/helix/users/follows", params: {to_id:"210661934"}, headers: {
+                    action: ReqParams.getFollwers.action, 
+                    message: ReqParams.getFollwers.message,
+                    payload: {method: ReqParams.getFollwers.method, url: ReqParams.getFollwers.baseUrl, params: ReqParams.getFollwers.params, headers: {
                                 Authorization: `Bearer ${token.value}`,
-                                "client-id":params.client_id
+                                "client-id":ReqParams.getFollwers.headers.clientId
                                                             }
                 }}
             ))
