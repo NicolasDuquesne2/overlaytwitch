@@ -17,51 +17,63 @@ function Home() {
     const tokenUrl =  useSetUrlWithParams(baseUrl, params)
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
-    const followers = useSelector(state => state.followers)
-    const token = useSelector(state => state.token)
+    const followers = useSelector(state => state.followers.value)
+    const followersErr = useSelector(state => state.followers.err)
+    const token = useSelector(state => state.token.value)
     let numOfFollowers = null
     let lastFollower = null
     
+    
     useEffect(() => {
 
-        const localStorToken = localStorage.getItem('token')
-    
 
-        if (urlParams.includes(null) && token.value === null && localStorToken === null) {
+        const localStorToken = localStorage.getItem('token')
+        
+        // launches the getting token request if the url is localhost root, no redux token nor token local storage
+        if (urlParams.includes(null) && token === null && localStorToken === null) {
             window.location.href = tokenUrl
         }
 
-        if (!urlParams.includes(null) && token.value === null && localStorToken === null) {
+        // Refresh getting token operation if the token expired
+        if (followersErr === "Invalid OAuth token") {
+            window.location.href = tokenUrl
+        }
+
+        // sets token state if the response of the getting token contains the token param, if token state is null, and no local storage value
+        if (!urlParams.includes(null) && token === null && localStorToken === null) {
             dispatch(setToken(urlParams[0]))
         }
 
+        // sets token with the local storage value 
         if (localStorToken !== null) {
             dispatch(setToken(localStorToken))
         }
     
-        if (token.value !== null) {
+        // if the state token exists then the storage is updated and the followers data is fetched 
+        if (token !== null) {
 
-            localStorage.setItem('token', token.value)
+            localStorage.setItem('token', token)
             dispatch(fetchFollowers(
                 {
                     action: ReqParams.getFollwers.action, 
                     message: ReqParams.getFollwers.message,
                     payload: {method: ReqParams.getFollwers.method, url: ReqParams.getFollwers.baseUrl, params: ReqParams.getFollwers.params, headers: {
-                                Authorization: `Bearer ${token.value}`,
+                                Authorization: `Bearer ${token}`,
                                 "client-id":ReqParams.getFollwers.headers.clientId
                                                             }
                 }}
             ))
         }
 
+        // Redirects to the localhost root
         if (window.location.href !== params.redirect_uri) { window.location.href = params.redirect_uri}
 
-    }, [token])
+    }, [token, followersErr])
 
 
-    if (followers.value !== null) {
-        numOfFollowers =  followers.value.total
-        lastFollower =  followers.value.data[0].from_name
+    if (followers !== null) {
+        numOfFollowers =  followers.total
+        lastFollower =  followers.data[0].from_name
         return (
             <React.Fragment>
                 <div className="bg"></div>
