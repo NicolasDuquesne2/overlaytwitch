@@ -13,7 +13,7 @@ function Game() {
             <div className="content">
                     <Header params={{numOfFollowers: null, lastFollower: null}}/>
                     <Body params={{title: null}}/>
-                    <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
+                    <Footer params={{music: null, composer: null}}/>
             </div>
         </React.Fragment>
     )
