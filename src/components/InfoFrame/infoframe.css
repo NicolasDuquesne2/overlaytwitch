@@ -1,0 +1,11 @@
+.info-frame {
+    background: red;
+    padding: 10px 5px 10px 5px;
+}
+
+
+.info-text {
+    font-size: 15px;
+    font-family: "Roboto";
+    margin: 0;
+}
