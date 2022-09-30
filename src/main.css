@@ -52,3 +52,8 @@ body {
   justify-content: space-between;
   height: 100vh;
 }
+
+.bold {
+  font-weight: 700;
+  color: white;
+}

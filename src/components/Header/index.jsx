@@ -19,10 +19,9 @@ function Header({params}) {
     return (
         <header className="header">
              <Clock value={time} />
-             <h1>PopAndRepop</h1>
              <div className="stats-wrapper">
-                <InfoFrame key="info-1" text={`${params.numOfFollowers} personnes suivent déjà la chaine`} />
-                <InfoFrame  key="info-2" text={`${params.lastFollower} nous a rejoint dernièrement`} />
+                <InfoFrame key="info-1" text={{var:params.numOfFollowers, const: "personnes suivent déjà la chaine" }} />
+                <InfoFrame  key="info-2" text={{var: params.lastFollower, const: "nous a rejoint dernièrement"}} />
              </div>
         </header>
     )
