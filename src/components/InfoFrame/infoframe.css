@@ -3,7 +3,7 @@
     padding: 20px;
 }
 
-.info-text-frame {
+.info-text-wrapper {
     overflow: hidden;
 }
 
@@ -11,6 +11,7 @@
     font-size: 15px;
     font-family: "Roboto";
     margin: 0;
+    animation: scrolltext 10s infinite;
 }
 
 
@@ -59,4 +60,14 @@
 	border-right: 30px solid transparent;
 	height: 0;
 	width: 125px;
+}
+
+@keyframes scrolltext {
+    0%, 5% {
+        transform: translate(-100%);
+    }
+
+    5%, 100% {
+        transform: translate(0);
+    }
 }
