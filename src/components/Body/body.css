@@ -1,9 +1,21 @@
 .home-body {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
 }
 
 .body-title {
     font-size: 6rem;
+}
+
+.cam-frame {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 200px;
+    height: 200px;
+    border-style: double;
+    border-color: white;
 }
