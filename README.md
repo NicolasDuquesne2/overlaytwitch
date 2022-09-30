@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Getting Started with twitch app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This simple twitch app displays 3 scenes : Enter, game, and ending.
+Two datas are displayble for now (further improvements)
+this app is optimized for [Implicit grant flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#implicit-grant-flow) (front end app)
+this app need to [register an app at Twitch](https://dev.twitch.tv/docs/authentication/register-app)
+below informations on how to prepare params
 
-## Available Scripts
+## Text params
 
-In the project directory, you can run:
+create a params folder under src
+create a Text.jsx file
+put this data template
 
-### `npm start`
+export const texts = {
+    home: {
+        title: "",
+        music: "",
+        composer: ""
+    },
+    game: {
+        title: ""
+    },
+    ending: {
+        title: "",
+        music: "",
+        composer: ""
+    }
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+write what you want between quotes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requests params
 
-### `npm test`
+create UrlTokenRequestParams.jsx document within the params folder
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Then copy params below
 
-### `npm run build`
+This app is optimized for [Implicit grant flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#implicit-grant-flow) then
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+by default a react app starts on port 3000. change it if you changed this
+but don't modify routes game & ending
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You must create an [app for twitch](https://dev.twitch.tv/docs/authentication/register-app) and get the app id
+const appId = ""
+const home = "http://localhost:3000/"
+const game = "http://localhost:3000/game"
+const ending = "http://localhost:3000/ending"
+const responseType = "token"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const scopes = "user:read:follows user:read:email"
 
-### `npm run eject`
+Not need to modify that
+export const params = {
+    response_type: responseType,
+    client_id: appId,
+    redirect_uri: "",
+    scope: scopes
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Not need to modify that
+export const routes = {
+    home: home,
+    game: game,
+    ending: ending,
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Not need to modify that - the default base url to get the auth token
+export const baseUrl = "https://id.twitch.tv/oauth2/authorize"
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Not need to modify that
+export const paramsToSearch = ["#access_token"]
 
-## Learn More
+modify only your to_id, corresponding to digits in your stream id
+export const ReqParams = {
+    getFollwers: {
+        action: "getFollowers",
+        message: "Followers data could not be fetched",
+        method: "get",
+        baseUrl: "https://api.twitch.tv/helix/users/follows",
+        params: {
+            to_id:""
+        },
+        headers: {
+            clientId: appId
+        }
+    }
+}
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
