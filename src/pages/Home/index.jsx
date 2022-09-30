@@ -8,13 +8,13 @@ import {setToken } from '../../Redux/Token/tokenSlice'
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {texts} from "../../params/Texts"
-import {params, baseUrl, paramsToSearch, ReqParams} from "../../params/UrlTokenRequestParams"
+import {params, baseUrl, paramsToSearch, ReqParams, routes} from "../../params/UrlTokenRequestParams"
 import "./home.css"
 
-function Home() {
+function Home({route}) {
 
     const dispatch = useDispatch()
-    const tokenUrl =  useSetUrlWithParams(baseUrl, params)
+    const tokenUrl =  useSetUrlWithParams(baseUrl, params, routes[route])
     const queryString = window.location.hash
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers.value)
@@ -66,7 +66,9 @@ function Home() {
         }
 
         // Redirects to the localhost root
-        if (window.location.href !== params.redirect_uri) { window.location.href = params.redirect_uri}
+        if (window.location.href !== params.redirect_uri)  {
+            console.log(params.redirect_uri) 
+            window.location.href = params.redirect_uri}
 
     }, [token, followersErr])
 

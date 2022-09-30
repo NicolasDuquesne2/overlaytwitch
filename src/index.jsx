@@ -14,9 +14,9 @@ root.render(
   <Router >
     <Provider store={store}>
       <Routes >
-          <Route exact path="/" element={ <Home />} />
-          <Route path="/game" element={ <Game />} />
-          <Route path="/ending" element={<Ending />} />
+          <Route exact path="/" element={ <Home route="home" />} />
+          <Route path="/game" element={ <Game route="game"/>} />
+          <Route path="/ending" element={<Ending route="ending"/>} />
       </Routes>
     </Provider>
   </Router>

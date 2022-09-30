@@ -1,8 +1,9 @@
 import React from "react"
 
-function useSetUrlWithParams(baseUrl, params) {
-   
+function useSetUrlWithParams(baseUrl, params, route) {
+    
     const encodeQueryString = (params) => {
+        params.redirect_uri = route
         let urlParams = []
         for (let key in params) {
             let encodedParam = encodeURIComponent(params[key])
