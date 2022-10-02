@@ -6,6 +6,17 @@ this app is optimized for [Implicit grant flow](https://dev.twitch.tv/docs/authe
 this app need to [register an app at Twitch](https://dev.twitch.tv/docs/authentication/register-app)
 below informations on how to prepare params
 
+## Requirements
+
+Install [NodeJs](https://nodejs.org/en/)
+If needed change [the scripts policy for windows](https://windowsloop.com/enable-powershell-scripts-execution-windows-10/)
+
+## Installation
+
+clone this app,
+Go in the app folder
+execute npm install
+
 ## Text params
 
 create a params folder under src
