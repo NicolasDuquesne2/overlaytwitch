@@ -10,10 +10,12 @@ export const followersSlice = createSlice( {
     reducers: {
         getFollowers: (state, action) => {
             state.value = action.payload
+            state.err = ""
         },
 
         getError: (state, action) => {
             state.err = action.payload
+            state.value = null
         }
     }
 })

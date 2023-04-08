@@ -23,34 +23,27 @@ function Ending({route}) {
 
 
     useEffect(() => {
-
-
         const localStorToken = localStorage.getItem('token')
-        
+
         // launches the getting token request if the url is localhost root, no redux token nor token local storage
-        if (urlParams.includes(null) && token === null && localStorToken === null) {
+        if (urlParams.includes(null) && localStorToken === null) {
             window.location.href = tokenUrl
         }
 
-        // Refresh getting token operation if the token expired
+         // Refresh getting token operation if the token expired
         if (followersErr === "Invalid OAuth token") {
             window.location.href = tokenUrl
         }
 
-        // sets token state if the response of the getting token contains the token param, if token state is null, and no local storage value
-        if (!urlParams.includes(null) && token === null && localStorToken === null) {
-            dispatch(setToken(urlParams[0]))
-        }
-
-        // sets token with the local storage value 
-        if (localStorToken !== null) {
-            dispatch(setToken(localStorToken))
+    
+        // sets token state if the response of the getting token contains the token param
+        if (!urlParams.includes(null)) {
+            localStorage.setItem('token', urlParams[0])
         }
     
         // if the state token exists then the storage is updated and the followers data is fetched 
-        if (token !== null) {
-
-            localStorage.setItem('token', token)
+        if (localStorage.getItem('token') !== null) {
+            const token = localStorage.getItem('token')
             dispatch(fetchFollowers(
                 {
                     action: ReqParams.getFollwers.action, 
@@ -64,27 +57,32 @@ function Ending({route}) {
         }
 
         // Redirects to the localhost root
-        if (window.location.href !== params.redirect_uri) { window.location.href = params[route] }
+        if (window.location.href !== params.redirect_uri)  {
+            console.log(params.redirect_uri) 
+            window.location.href = params.redirect_uri}
 
-    }, [token, followersErr])
+    }, [followersErr])
 
-
-    if (followers !== null) {
+    if (followers != null) {
         numOfFollowers =  followers.total
         lastFollower =  followers.data[0].from_name
-        return (
-            <React.Fragment>
-                <div className="bg"></div>
-                <div className="bg bg2"></div>
-                <div className="bg bg3"></div>
-                <div className="content">
-                        <Header params={{numOfFollowers, lastFollower}}/>
-                        <Body params={{title: texts.ending.title}}/>
-                        <Footer params={{music: texts.ending.music, composer: texts.ending.composer}}/>
-                </div>
-            </React.Fragment>
-        )
+    } else {
+        numOfFollowers =  ""
+        lastFollower =  ""
     }
+
+    return (
+        <React.Fragment>
+            <div className="bg"></div>
+            <div className="bg bg2"></div>
+            <div className="bg bg3"></div>
+            <div className="content">
+                    <Header params={{numOfFollowers, lastFollower}}/>
+                    <Body params={{title: texts.ending.title}}/>
+                    <Footer params={{music: texts.ending.music, composer: texts.ending.composer}}/>
+            </div>
+        </React.Fragment>
+    )
 }
 
 export default Ending
