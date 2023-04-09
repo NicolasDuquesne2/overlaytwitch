@@ -3,9 +3,7 @@ import {createRoot} from 'react-dom/client'
 import { BrowserRouter as Router,Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './Redux'
-import Home from './pages/Home'
-import Game from './pages/Game'
-import Ending from './pages/Ending'
+import PageController from './components/PageController'
 import "./main.css"
 
 
@@ -14,9 +12,9 @@ root.render(
   <Router >
     <Provider store={store}>
       <Routes >
-          <Route exact path="/" element={ <Home route="home" />} />
-          <Route path="/game" element={ <Game route="game"/>} />
-          <Route path="/ending" element={<Ending route="ending"/>} />
+          <Route exact path="/" element={ <PageController route="home" />} />
+          <Route path="/game" element={ <PageController route="game"/>} />
+          <Route path="/ending" element={<PageController route="ending"/>} />
       </Routes>
     </Provider>
   </Router>
