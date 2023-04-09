@@ -4,7 +4,6 @@ import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
-import {setToken } from '../../Redux/Token/tokenSlice'
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {texts} from "../../params/Texts"
@@ -19,7 +18,6 @@ function Home({route}) {
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers.value)
     const followersErr = useSelector(state => state.followers.err)
-    const token = useSelector(state => state.token.value)
     let numOfFollowers = null
     let lastFollower = null
     
@@ -32,7 +30,7 @@ function Home({route}) {
             window.location.href = tokenUrl
         }
 
-         // Refresh getting token operation if the token expired
+        // Refresh getting token operation if the token expired
         if (followersErr === "Invalid OAuth token") {
             window.location.href = tokenUrl
         }
@@ -73,8 +71,8 @@ function Home({route}) {
         lastFollower =  ""
     }
 
+ 
 
-   
     return (
         <React.Fragment>
             <div className="bg"></div>

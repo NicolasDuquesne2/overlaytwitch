@@ -1,7 +1,6 @@
 import React,  {useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
-import {setToken } from '../../Redux/Token/tokenSlice'
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../../Hooks/useGetUrlParams"
 import {params, baseUrl, paramsToSearch, ReqParams, routes} from "../../params/UrlTokenRequestParams"
@@ -17,7 +16,6 @@ function Ending({route}) {
     const urlParams = useGetUrlParams(queryString, paramsToSearch)
     const followers = useSelector(state => state.followers.value)
     const followersErr = useSelector(state => state.followers.err)
-    const token = useSelector(state => state.token.value)
     let numOfFollowers = null
     let lastFollower = null
 
