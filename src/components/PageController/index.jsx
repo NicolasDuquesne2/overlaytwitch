@@ -1,6 +1,7 @@
 import React, {useEffect } from "react"
 import Home from "../../pages/Home"
 import Game from "../../pages/Game"
+import Ending from "../../pages/Ending"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
 import useSetUrlWithParams from "../../Hooks/useSetUrlWithParams"
@@ -78,7 +79,7 @@ function PageController({route}) {
     }
 
     if (route === "ending") {
-        return <Game numOfFollowers={numOfFollowers} lastFollower={lastFollower} />
+        return <Ending numOfFollowers={numOfFollowers} lastFollower={lastFollower} />
     }
 }
 
