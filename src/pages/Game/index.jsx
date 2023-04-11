@@ -1,9 +1,10 @@
 import React from "react"
 import Header from "../../components/Header"
+import PagesDecorator from "../../Decorator"
 import Body from "../../components/Body"
 import Footer from "../../components/Footer"
 
-function Game({numOfFollowers, lastFollower}) {
+function Game({route, numOfFollowers, lastFollower}) {
     
 
     return (
@@ -20,4 +21,4 @@ function Game({numOfFollowers, lastFollower}) {
     )
 }
 
-export default Game
+export default PagesDecorator(Game)

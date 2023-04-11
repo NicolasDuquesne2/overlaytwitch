@@ -1,11 +1,12 @@
-import React, {useEffect } from "react"
+import React from "react"
+import PagesDecorator from "../../Decorator"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import {texts} from "../../params/Texts"
 import "./home.css"
 
-function Home({numOfFollowers, lastFollower}) {
+function Home({route, numOfFollowers, lastFollower}) {
 
     return (
         <React.Fragment>
@@ -21,4 +22,4 @@ function Home({numOfFollowers, lastFollower}) {
     )
 }
 
-export default Home
+export default PagesDecorator(Home)
