@@ -53,8 +53,8 @@ function PagesDecorator(Component) {
     
             // Redirects to the localhost root
             if (window.location.href !== params.redirect_uri)  {
-                console.log(params.redirect_uri) 
-                window.location.href = params.redirect_uri}
+                window.location.href = params.redirect_uri
+            }
     
         }, [followersErr])
 
