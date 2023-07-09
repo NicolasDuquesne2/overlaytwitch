@@ -18,43 +18,55 @@ function PagesDecorator(Component) {
         let lastFollower=""
 
         useEffect(() => {
-            const localStorToken = localStorage.getItem('token')
-    
-            // launches the getting token request if the url is localhost root, no redux token nor token local storage
-            if (urlParams.includes(null) && localStorToken === null) {
-                window.location.href = tokenUrl
-            }
-    
-            // Refresh getting token operation if the token expired
-            if (followersErr === "Invalid OAuth token") {
-                window.location.href = tokenUrl
-            }
-    
+
+            function fetchDatas(){
+
+                const localStorToken = localStorage.getItem('token')
+
+                // launches the getting token request if the url is localhost root, no redux token nor token local storage
+                if (urlParams.includes(null) && localStorToken === null) {
+                    window.location.href = tokenUrl
+                }
         
-            // sets token state if the response of the getting token contains the token param
-            if (!urlParams.includes(null)) {
-                localStorage.setItem('token', urlParams[0])
-            }
+                // Refresh getting token operation if the token expired
+                if (followersErr === "Invalid OAuth token") {
+                    window.location.href = tokenUrl
+                }
         
-            // if the state token exists then the storage is updated and the followers data is fetched 
-            if (localStorage.getItem('token') !== null) {
-                const token = localStorage.getItem('token')
-                dispatch(fetchFollowers(
-                    {
-                        action: ReqParams.getFollwers.action, 
-                        message: ReqParams.getFollwers.message,
-                        payload: {method: ReqParams.getFollwers.method, url: ReqParams.getFollwers.baseUrl, params: ReqParams.getFollwers.params, headers: {
-                                    Authorization: `Bearer ${token}`,
-                                    "client-id":ReqParams.getFollwers.headers.clientId
-                                                                }
-                    }}
-                ))
+            
+                // sets token state if the response of the getting token contains the token param
+                if (!urlParams.includes(null)) {
+                    localStorage.setItem('token', urlParams[0])
+                }
+            
+                // if the state token exists then the storage is updated and the followers data is fetched 
+                if (localStorage.getItem('token') !== null) {
+                    const token = localStorage.getItem('token')
+                    dispatch(fetchFollowers(
+                        {
+                            action: ReqParams.getFollwers.action, 
+                            message: ReqParams.getFollwers.message,
+                            payload: {method: ReqParams.getFollwers.method, url: ReqParams.getFollwers.baseUrl, params: ReqParams.getFollwers.params, headers: {
+                                        Authorization: `Bearer ${token}`,
+                                        "client-id":ReqParams.getFollwers.headers.clientId
+                                                                    }
+                        }}
+                    ))
+                }
+        
+                // Redirects to the localhost root
+                if (window.location.href !== params.redirect_uri)  {
+                    window.location.href = params.redirect_uri
+                }
+
             }
-    
-            // Redirects to the localhost root
-            if (window.location.href !== params.redirect_uri)  {
-                window.location.href = params.redirect_uri
-            }
+
+            fetchDatas()
+            const interval= setInterval(fetchDatas, 120000)
+
+            return () => {
+                clearInterval(interval);
+            };
     
         }, [followersErr])
 
