@@ -6,7 +6,7 @@ import Body from "../../components/Body"
 import {texts} from "../../params/Texts"
 import "./home.css"
 
-function Home({route, numOfFollowers, lastFollower}) {
+function Home({route, followersData, streamInfosData}) {
 
     return (
         <React.Fragment>
@@ -14,8 +14,8 @@ function Home({route, numOfFollowers, lastFollower}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header params={{numOfFollowers, lastFollower}}/>
-                    <Body params={{title: texts.home.title}}/>
+                    <Header params={followersData}/>
+                    <Body params={{title: texts.home.title, streamInfosData:streamInfosData}}/>
                     <Footer params={{music: texts.home.music, composer: texts.home.composer}}/>
             </div>
         </React.Fragment>

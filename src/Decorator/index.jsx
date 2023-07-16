@@ -4,6 +4,7 @@ import { fetchFollowers } from "../Redux/Followers/followersSlice"
 import useSetUrlWithParams from "../Hooks/useSetUrlWithParams"
 import useGetUrlParams from "../Hooks/useGetUrlParams"
 import {params, baseUrl, paramsToSearch, ReqParams, routes} from "../params/UrlTokenRequestParams"
+import { fetchStreamInfos } from "../Redux/StreamInfos/streamInfosSlice"
 
 function PagesDecorator(Component) {
 
@@ -14,12 +15,14 @@ function PagesDecorator(Component) {
         const urlParams = useGetUrlParams(queryString, paramsToSearch)
         const followers = useSelector(state => state.followers.value)
         const followersErr = useSelector(state => state.followers.err)
-        let numOfFollowers =""
-        let lastFollower=""
+        const streamInfos = useSelector(state => state.streamInfos.value)
+        const streamInfosErr = useSelector(state => state.streamInfos.err)
+        let followersData = {}
+        let streamInfosData = {}
 
         useEffect(() => {
 
-            function fetchDatas(){
+            function fetchToken(){
 
                 const localStorToken = localStorage.getItem('token')
 
@@ -29,7 +32,7 @@ function PagesDecorator(Component) {
                 }
         
                 // Refresh getting token operation if the token expired
-                if (followersErr === "Invalid OAuth token") {
+                if (followersErr === "Invalid OAuth token" || streamInfosErr === "Invalid OAuth token") {
                     window.location.href = tokenUrl
                 }
         
@@ -38,10 +41,20 @@ function PagesDecorator(Component) {
                 if (!urlParams.includes(null)) {
                     localStorage.setItem('token', urlParams[0])
                 }
-            
+        
+                // Redirects to the localhost root
+                if (window.location.href !== params.redirect_uri)  {
+                    window.location.href = params.redirect_uri
+                }
+
+            }
+
+
+            function getFollowers () {
                 // if the state token exists then the storage is updated and the followers data is fetched 
                 if (localStorage.getItem('token') !== null) {
                     const token = localStorage.getItem('token')
+                    console.log("fetch followers");
                     dispatch(fetchFollowers(
                         {
                             action: ReqParams.getFollwers.action, 
@@ -53,32 +66,50 @@ function PagesDecorator(Component) {
                         }}
                     ))
                 }
-        
-                // Redirects to the localhost root
-                if (window.location.href !== params.redirect_uri)  {
-                    window.location.href = params.redirect_uri
-                }
-
             }
 
-            fetchDatas()
-            const interval= setInterval(fetchDatas, 120000)
+
+            function getStreamInfos() {
+                if (localStorage.getItem('token') !== null) {
+                    const token = localStorage.getItem('token')
+                    console.log("fetch stream infos");
+                    dispatch(fetchStreamInfos(
+                        {
+                            action: ReqParams.getStreamInfos.action, 
+                            message: ReqParams.getStreamInfos.message,
+                            payload: {method: ReqParams.getStreamInfos.method, url: ReqParams.getStreamInfos.baseUrl, params: ReqParams.getStreamInfos.params, headers: {
+                                        Authorization: `Bearer ${token}`,
+                                        "client-id":ReqParams.getStreamInfos.headers.clientId
+                                                                    }
+                        }}
+                    ))
+                }
+            }
+
+            fetchToken()
+            getFollowers()
+            getStreamInfos()
+            const intervalOnFollowers= setInterval(getFollowers, 120000)
 
             return () => {
-                clearInterval(interval);
+                clearInterval(intervalOnFollowers);
             };
     
         }, [followersErr])
 
         if (followers != null) {
-            numOfFollowers =  followers.total
-            lastFollower =  followers.data[0].from_name
-        } else {
-            numOfFollowers =  ""
-            lastFollower =  ""
+
+            followersData.numOfFollowers = followers.total
+            followersData.lastFollower = followers.data[0].user_name
+        } 
+
+        if(streamInfos != null) {
+            streamInfosData.gameName = streamInfos.data[0].game_name
+            streamInfosData.title = streamInfos.data[0].title
+            streamInfosData.tags = streamInfos.data[0].tags
         }
 
-        return <Component {...props} numOfFollowers={numOfFollowers} lastFollower={lastFollower}/>
+        return <Component {...props} followersData={followersData} streamInfosData={streamInfosData}/>
     }
 
 }

@@ -4,21 +4,41 @@ import "./body.css"
 
 function Body({params}) {
 
-    let h1html = null
+
+    let textFrame = null
+    let gameFrame = null
     let lefthtml = null
+    const infosdatas = params.streamInfosData
+
+
+    console.log(infosdatas);
 
     if (params.title !== null) {
-        h1html =  <h1 className="body-title">{params.title}</h1>
+
+        textFrame = <section className="home-body">
+                        <h1 className="body-title">{params.title}</h1>
+                        <div className="info-frame">
+                            <p className="info-data">{infosdatas?.gameName}</p>
+                            <p className="info-data">{infosdatas?.title}</p>
+                        </div>
+                    </section>
     } else {
-        lefthtml = <div className="cam-frame"></div>
+
+        gameFrame = <section className="home-body">
+                        <div className="cam-frame"></div>
+                       {/* { <div className="info-frame-game">
+                            <p>{infosdatas?.gameName}</p>
+                            <p>{infosdatas?.title}</p>
+                        </div>} */}
+                    </section>
     }
 
     if (params) {
         return (
-            <section className="home-body">
-                {h1html}
-                {lefthtml}
-            </section>
+            <React.Fragment>
+                 {textFrame}
+                 {gameFrame}
+            </React.Fragment>
         )
     }
 }
