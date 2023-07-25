@@ -54,7 +54,6 @@ function PagesDecorator(Component) {
                 // if the state token exists then the storage is updated and the followers data is fetched 
                 if (localStorage.getItem('token') !== null) {
                     const token = localStorage.getItem('token')
-                    console.log("fetch followers");
                     dispatch(fetchFollowers(
                         {
                             action: ReqParams.getFollwers.action, 
@@ -72,7 +71,6 @@ function PagesDecorator(Component) {
             function getStreamInfos() {
                 if (localStorage.getItem('token') !== null) {
                     const token = localStorage.getItem('token')
-                    console.log("fetch stream infos");
                     dispatch(fetchStreamInfos(
                         {
                             action: ReqParams.getStreamInfos.action, 
@@ -86,13 +84,25 @@ function PagesDecorator(Component) {
                 }
             }
 
+
+            function getCurrentSound() {
+                fetch("http://localhost:8070")
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .catch(error => console.log(error + " Error in getting current sound"))
+            }
+
             fetchToken()
             getFollowers()
             getStreamInfos()
+            //getCurrentSound()
+
             const intervalOnFollowers= setInterval(getFollowers, 120000)
+            //const intervalOnCurrSounds = setInterval(getCurrentSound, 10000)
 
             return () => {
-                clearInterval(intervalOnFollowers);
+                clearInterval(intervalOnFollowers)
+                //clearInterval(intervalOnCurrSounds)
             };
     
         }, [followersErr])
@@ -108,6 +118,9 @@ function PagesDecorator(Component) {
             streamInfosData.title = streamInfos.data[0].title
             streamInfosData.tags = streamInfos.data[0].tags
         }
+
+        //"G:/moi/Documents/Twitch/pretzel_current_music.txt"
+
 
         return <Component {...props} followersData={followersData} streamInfosData={streamInfosData}/>
     }
