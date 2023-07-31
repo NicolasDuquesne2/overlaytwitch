@@ -13,9 +13,9 @@ function Ending({route}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
-                    <Body text={{title: texts.ending.title}}/>
-                    <Footer text={{music: texts.ending.music, composer: texts.ending.composer}}/>
+                    <Header route={route}/>
+                    <Body route={route}/>
+                    <Footer route={route}/>
             </div>
         </React.Fragment>
     )

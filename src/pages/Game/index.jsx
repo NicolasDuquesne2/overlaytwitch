@@ -13,9 +13,9 @@ function Game({route, followersData, streamInfosData}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
-                    <Body text={{title: null}}/>
-                    <Footer text={{music: null, composer: null}}/>
+                    <Header route={route}/>
+                    <Body route={route}/>
+                    <Footer route={route}/>
             </div>
         </React.Fragment>
     )

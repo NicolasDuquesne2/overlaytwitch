@@ -13,9 +13,9 @@ function Break({route}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
-                    <Body text={{title: texts.break.title}}/>
-                    <Footer text={{music: texts.break.music, composer: texts.break.composer}}/>
+                    <Header route={route}/>
+                    <Body route={route}/>
+                    <Footer route={route}/>
             </div>
         </React.Fragment>
     )

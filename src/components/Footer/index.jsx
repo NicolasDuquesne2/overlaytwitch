@@ -2,7 +2,7 @@ import React from "react"
 import "./footer.css"
 import {texts} from "../../params/Texts"
 
-function Footer() {
+function Footer({route}) {
 
     let titlehtml = null
 

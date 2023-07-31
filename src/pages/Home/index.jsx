@@ -15,9 +15,9 @@ function Home({route}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header />
-                    <Body />
-                    <Footer />
+                    <Header route={route}/>
+                    <Body route={route}/>
+                    <Footer route={route}/>
             </div>
         </React.Fragment>
     )

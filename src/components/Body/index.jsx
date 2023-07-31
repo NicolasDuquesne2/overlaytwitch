@@ -5,11 +5,13 @@ import { fetchStreamInfos } from "../../Redux/StreamInfos/streamInfosSlice"
 import "./body.css"
 import {texts} from "../../params/Texts"
 
-function Body() {
+function Body({route}) {
     let textFrame = null
     let gameFrame = null
     const dispatch = useDispatch()
     const streamInfos = useSelector(state => state.streamInfos.value)
+    const routeTextes = texts[route]
+
 
     useEffect(() => {
 
@@ -35,10 +37,10 @@ function Body() {
 
     }, [])
 
-    if (texts.home.title !== null) {
+    if (route !== "game") {
 
         textFrame = <section className="home-body">
-                        <h1 className="body-title">{texts.home.title}</h1>
+                        <h1 className="body-title">{routeTextes.title}</h1>
                         <div className="info-frame">
                             <p className="info-data">{streamInfos?.data[0].game_name}</p>
                             <p className="info-data">{streamInfos?.data[0].title}</p>
