@@ -87,9 +87,9 @@ function PagesDecorator(Component) {
 
             function getCurrentSound() {
                 fetch("http://localhost:8070")
-                .then(res => res.json())
+                .then(res => res.data)
                 .then(res => console.log(res))
-                .catch(error => console.log(error + " Error in getting current sound"))
+                .catch(res => console.log(res.error + " Error in getting current sound"))
             }
 
             fetchToken()

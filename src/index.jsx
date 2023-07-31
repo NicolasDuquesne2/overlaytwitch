@@ -15,10 +15,10 @@ root.render(
   <Router >
     <Provider store={store}>
       <Routes >
-          <Route exact path="/" element={ <Home route="home" numOfFollowers="" lastFollower=""/>} />
-          <Route path="/game" element={ <Game route="game" numOfFollowers="" lastFollower=""/>} />
-          <Route path="/ending" element={<Ending route="ending" numOfFollowers="" lastFollower=""/>} />
-          <Route path="/break" element={<Break route="break" numOfFollowers="" lastFollower="" />} />
+          <Route exact path="/" element={ <Home route="home"/>} />
+          <Route path="/game" element={ <Game route="game"/>} />
+          <Route path="/ending" element={<Ending route="ending"/>} />
+          <Route path="/break" element={<Break route="break"/>} />
       </Routes>
     </Provider>
   </Router>

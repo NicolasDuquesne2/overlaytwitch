@@ -1,11 +1,14 @@
 import React from "react"
 import axios from "axios"
 
-
+/**
+ * Return an axios promise
+ * @param {*} params 
+ * @returns 
+ */
 export function useAxios(params) {
     
     function fetchAxios(payload, message) {
-        let returned = null
     
         async function fetchData() {
             try {
@@ -22,10 +25,8 @@ export function useAxios(params) {
             } finally {
             }
         }
-        
-        returned = fetchData()
     
-        return returned
+        return fetchData()
     }
 
     if (params) {

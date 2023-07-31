@@ -5,7 +5,7 @@ import Footer from "../../components/Footer"
 import Body from "../../components/Body"
 import {texts} from "../../params/Texts"
 
-function Ending({route, followersData, streamInfosData}) {
+function Ending({route}) {
     
     return (
         <React.Fragment>
@@ -13,12 +13,12 @@ function Ending({route, followersData, streamInfosData}) {
             <div className="bg bg2"></div>
             <div className="bg bg3"></div>
             <div className="content">
-                    <Header params={followersData}/>
-                    <Body params={{title: texts.ending.title, streamInfosData}}/>
-                    <Footer params={{music: texts.ending.music, composer: texts.ending.composer}}/>
+                    <Header />
+                    <Body text={{title: texts.ending.title}}/>
+                    <Footer text={{music: texts.ending.music, composer: texts.ending.composer}}/>
             </div>
         </React.Fragment>
     )
 }
 
-export default PagesDecorator(Ending)
+export default Ending

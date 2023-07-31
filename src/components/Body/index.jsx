@@ -2,21 +2,19 @@ import React from "react"
 import "./body.css"
 
 
-function Body({params}) {
+function Body({text}) {
 
 
     let textFrame = null
     let gameFrame = null
     let lefthtml = null
-    const infosdatas = params.streamInfosData
+    const infosdatas = text.streamInfosData
 
 
-    console.log(infosdatas);
-
-    if (params.title !== null) {
+    if (text.title !== null) {
 
         textFrame = <section className="home-body">
-                        <h1 className="body-title">{params.title}</h1>
+                        <h1 className="body-title">{text.title}</h1>
                         <div className="info-frame">
                             <p className="info-data">{infosdatas?.gameName}</p>
                             <p className="info-data">{infosdatas?.title}</p>
@@ -33,7 +31,7 @@ function Body({params}) {
                     </section>
     }
 
-    if (params) {
+    if (text) {
         return (
             <React.Fragment>
                  {textFrame}

@@ -1,5 +1,11 @@
 import React from "react"
 
+/**
+ * Returns a list of params values from a query string and a list of params wanted
+ * @param {*} queryString 
+ * @param {*} paramsTargeted 
+ * @returns 
+ */
 function useGetUrlParams (queryString, paramsTargeted) {
     let params = []
 

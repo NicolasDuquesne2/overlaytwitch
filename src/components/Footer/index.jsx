@@ -1,15 +1,15 @@
 import React from "react"
 import "./footer.css"
 
-function Footer({params}) {
+function Footer({text}) {
 
     let titlehtml = null
 
-    if (params.music !== null && params.composer !== null) {
-        titlehtml = <h1>{params.music}: {params.composer}</h1>
+    if (text.music !== null && text.composer !== null) {
+        titlehtml = <h1>{text.music}: {text.composer}</h1>
     }
 
-    if(params) {
+    if(text) {
         return (
             <footer className="footer">
                 {titlehtml}
