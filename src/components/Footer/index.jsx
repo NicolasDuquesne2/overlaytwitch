@@ -4,10 +4,11 @@ import {texts} from "../../params/Texts"
 
 function Footer({route}) {
 
+    const routeTexts = texts[route]
     let titlehtml = null
 
-    if (texts.home.music !== null && texts.home.composer !== null) {
-        titlehtml = <h1>{texts.home.music}: {texts.home.composer}</h1>
+    if (routeTexts.music !== null && routeTexts.composer !== null) {
+        titlehtml = <h1>{routeTexts.music}: {routeTexts.composer}</h1>
     }
 
     return (
