@@ -1,23 +1,47 @@
-import React from "react"
+import React, {useEffect} from "react"
+import {ReqParams} from "../../params/UrlTokenRequestParams"
+import { useDispatch, useSelector } from "react-redux/es/exports"
+import { fetchStreamInfos } from "../../Redux/StreamInfos/streamInfosSlice"
 import "./body.css"
+import {texts} from "../../params/Texts"
 
-
-function Body({text}) {
-
-
+function Body() {
     let textFrame = null
     let gameFrame = null
-    let lefthtml = null
-    const infosdatas = text.streamInfosData
+    const dispatch = useDispatch()
+    const streamInfos = useSelector(state => state.streamInfos.value)
 
+    useEffect(() => {
 
-    if (text.title !== null) {
+        function getStreamInfos() {
+            // if the state token exists then the storage is updated and the followers data is fetched 
+            if (localStorage.getItem('token') !== null) {
+                const token = localStorage.getItem('token')
+                dispatch(fetchStreamInfos(
+                    {
+                        action: ReqParams.getStreamInfos.action, 
+                        message: ReqParams.getStreamInfos.message,
+                        payload: {method: ReqParams.getStreamInfos.method, url: ReqParams.getStreamInfos.baseUrl, params: ReqParams.getStreamInfos.params, headers: {
+                                    Authorization: `Bearer ${token}`,
+                                    "client-id":ReqParams.getStreamInfos.headers.clientId
+                                                                }
+                    }}
+                ))
+                       
+            }
+        }
+
+        getStreamInfos()
+
+    }, [])
+
+    if (texts.home.title !== null) {
 
         textFrame = <section className="home-body">
-                        <h1 className="body-title">{text.title}</h1>
+                        <h1 className="body-title">{texts.home.title}</h1>
                         <div className="info-frame">
-                            <p className="info-data">{infosdatas?.gameName}</p>
-                            <p className="info-data">{infosdatas?.title}</p>
+                            <p className="info-data">{streamInfos?.data[0].game_name}</p>
+                            <p className="info-data">{streamInfos?.data[0].title}</p>
                         </div>
                     </section>
     } else {
@@ -31,14 +55,12 @@ function Body({text}) {
                     </section>
     }
 
-    if (text) {
-        return (
-            <React.Fragment>
-                 {textFrame}
-                 {gameFrame}
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+             {textFrame}
+             {gameFrame}
+        </React.Fragment>
+    )
 }
 
 export default Body

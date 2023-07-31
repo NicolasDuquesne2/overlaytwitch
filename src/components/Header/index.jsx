@@ -7,7 +7,7 @@ import { fetchFollowers } from "../../Redux/Followers/followersSlice"
 import 'react-clock/dist/Clock.css';
 import "./header.css"
 
-function Header(route) {
+function Header() {
 
     const dispatch = useDispatch()
     const followers = useSelector(state => state.followers.value)
