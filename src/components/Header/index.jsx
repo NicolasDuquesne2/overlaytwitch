@@ -44,8 +44,8 @@ function Header({route}) {
 
     return (
         <header className="header">
+            <ClockContainer />
              <div className="stats-wrapper">
-                <ClockContainer />
                 <InfoFrame key="info-1" text={{var:followers?.total, const: "personnes suivent déjà la chaine" }} />
                 <InfoFrame  key="info-2" text={{var: followers?.data[0].user_name, const: "nous a rejoint dernièrement"}} />
              </div>
