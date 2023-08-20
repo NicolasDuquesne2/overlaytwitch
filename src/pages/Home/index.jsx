@@ -7,8 +7,6 @@ import "./home.css"
 
 function Home({route}) {
     useHandleToken(route)
-
-    console.log("render home page");
     return (
         <React.Fragment>
             <div className="bg"></div>
