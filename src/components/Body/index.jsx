@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchStreamInfos } from "../../Redux/StreamInfos/streamInfosSlice"
 import "./body.css"
 import {texts} from "../../params/Texts"
+import {appId} from "../../params/apid"
 
 function Body({route}) {
     let textFrame = null
@@ -25,7 +26,7 @@ function Body({route}) {
                         message: ReqParams.getStreamInfos.message,
                         payload: {method: ReqParams.getStreamInfos.method, url: ReqParams.getStreamInfos.baseUrl, params: ReqParams.getStreamInfos.params, headers: {
                                     Authorization: `Bearer ${token}`,
-                                    "client-id":ReqParams.getStreamInfos.headers.clientId
+                                    "client-id":appId
                                                                 }
                     }}
                 ))

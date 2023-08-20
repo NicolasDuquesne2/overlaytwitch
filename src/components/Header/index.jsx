@@ -4,6 +4,7 @@ import ClockContainer from "../ClockContainer"
 import {ReqParams} from "../../params/UrlTokenRequestParams"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
+import {appId} from "../../params/apid"
 import 'react-clock/dist/Clock.css';
 import "./header.css"
 
@@ -25,7 +26,7 @@ function Header({route}) {
                         message: ReqParams.getFollwers.message,
                         payload: {method: ReqParams.getFollwers.method, url: ReqParams.getFollwers.baseUrl, params: ReqParams.getFollwers.params, headers: {
                                     Authorization: `Bearer ${token}`,
-                                    "client-id":ReqParams.getFollwers.headers.clientId
+                                    "client-id":appId
                                                                 }
                     }}
                 ))
