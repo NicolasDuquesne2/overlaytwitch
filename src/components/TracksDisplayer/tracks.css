@@ -1,0 +1,18 @@
+.tracks-p {
+    animation: 20s linear 0s infinite running scrolltracks;
+   
+}
+
+.tracks-container {
+    overflow: hidden;
+}
+
+@keyframes scrolltracks {
+    0%, 5% {
+        transform: translate(-100%);
+    }
+
+    5%, 100% {
+        transform: translate(0);
+    }
+}

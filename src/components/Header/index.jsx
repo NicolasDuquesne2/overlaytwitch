@@ -1,6 +1,7 @@
-import React, { useEffect} from "react"
+import React, { useEffect } from "react"
 import InfoFrame from "../InfoFrame"
 import ClockContainer from "../ClockContainer"
+import TracksDisplayer from "../TracksDisplayer"
 import {ReqParams} from "../../params/UrlTokenRequestParams"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { fetchFollowers } from "../../Redux/Followers/followersSlice"
@@ -9,10 +10,10 @@ import 'react-clock/dist/Clock.css';
 import "./header.css"
 
 function Header({route}) {
-
+   
     const dispatch = useDispatch()
     const followers = useSelector(state => state.followers.value)
-
+   
 
     useEffect(() => {
 
@@ -35,7 +36,6 @@ function Header({route}) {
         }
         getFollowers()
 
-
         const intervalOnFollowers= setInterval(getFollowers, 120000)
         return () => {
             clearInterval(intervalOnFollowers)
@@ -46,6 +46,7 @@ function Header({route}) {
     return (
         <header className="header">
             <ClockContainer />
+            <TracksDisplayer route={route} />
              <div className="stats-wrapper">
                 <InfoFrame key="info-1" text={{var:followers?.total, const: "personnes suivent déjà la chaine" }} />
                 <InfoFrame  key="info-2" text={{var: followers?.data[0].user_name, const: "nous a rejoint dernièrement"}} />
